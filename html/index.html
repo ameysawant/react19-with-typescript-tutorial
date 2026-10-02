@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plain JS Counter</title>
+</head>
+
+<body>
+    <h2>Plain JavaScript</h2>
+    <p>Count: <span id="count">0</span></p>
+    <button id="btn">+1</button>
+
+    <script>
+        let count = 0;
+
+        const countEl = document.getElementById('count');
+        const btn = document.getElementById('btn');
+
+        function increment() {
+            count++;
+            countEl.textContent = count; // manual DOM update
+            console.log('DOM manually updated');
+        }
+
+        btn.addEventListener('click', increment);
+    </script>
+</body>
+
+</html>

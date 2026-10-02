@@ -1,0 +1,99 @@
+Reconciliation kya hai?
+---------------------------------------------------------------
+
+Jab React state change hoti hai, toh wo ek naya Virtual DOM banata hai.
+
+Phir wo purane Virtual DOM se compare karta hai — isko Diffing kehte hain.
+
+Aur jo result aata hai uske basis pe React Real DOM ko update karta hai.
+
+Is pure process ka naam hai — Reconciliation.
+
+
+1. On Page load React create Virtual DOM (React creates this in Memory)
+
+{
+  type: 'div',
+  children: [
+    { type: 'h2', text: 'React + TypeScript' },
+    { type: 'p', text: 'Count: 0' },
+    { type: 'button', text: '+1' }
+  ]
+}
+
+
+
+2. Browser Real DOM created
+
+<div>
+  <h2>React + TypeScript</h2>
+  <p>Count: 0</p>          
+  <button>+1</button>
+</div>
+
+
+
+3. Pressed Button +1
+
+State changes: count: 0 → 1
+
+
+
+4. Now React creates new Virtual DOM again, but it's fast because it is just an object like below
+
+{
+  type: 'div',
+  children: [
+    { type: 'h2', text: 'React + TypeScript' },
+    { type: 'p', text: 'Count: 1' },
+    { type: 'button', text: '+1' }
+  ]
+}
+
+
+
+5. Now React compare (this is called Diffing Algorithm) Real DOM still shows Count: 0
+
+Old Virtual DOM #1:  	<p>Count: 0</p>
+New Virtual DOM #2:  	<p>Count: 1</p>
+                 	──────────────
+Change:           	Just "0" → "1" changed
+
+
+
+6. Result of Diffing
+
+{
+  changedElement: 'p',
+  oldText: 'Count: 0',
+  newText: 'Count: 1'
+}
+
+
+
+7. Now Real DOM Update only <p> text
+
+// React does not search the DOM for the <p> element again.
+// It already holds a reference to that real DOM node from the first render.
+// So it updates it directly:
+savedPReference.innerText = 'Count: 1';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
