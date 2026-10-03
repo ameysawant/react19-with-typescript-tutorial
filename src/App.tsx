@@ -1,9 +1,13 @@
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import Paragraph from "./components/Paragraph";
 
 const App = () => {
   return (
     <>
-      <Paragraph />
+      <Header />
+      <h2>This is app component</h2>
+      <Footer />
     </>
   );
 };

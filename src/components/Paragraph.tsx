@@ -1,18 +1,14 @@
 import styles from "./paragraph.module.css";
 
-const Paragraph = () => {
+type ParagraphProps = {
+  description: string;
+};
+
+const Paragraph = ({ description }: ParagraphProps) => {
+  console.log(description);
   return (
     <>
-      <p
-        className={styles.mypara}
-        // style={{
-        //   backgroundColor: "orange",
-        //   padding: "20px 20px",
-        //   color: "white",
-        // }}
-      >
-        This is a simple paragraph
-      </p>
+      <p className={styles.mypara}> {description}</p>
     </>
   );
 };
