@@ -1,13 +1,9 @@
-import Button, { Button2 } from "./components/Button";
+import Paragraph from "./components/Paragraph";
 
 const App = () => {
   return (
     <>
-      <Button />
-      <Button2 />
-      {2 + 2}
-      <img className="btn-primary" src="" alt="" />
-      <br />
+      <Paragraph />
     </>
   );
 };
