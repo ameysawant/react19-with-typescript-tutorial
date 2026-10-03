@@ -1,9 +1,15 @@
-type ButtonProps = {
-  name: string;
+const Button = () => {
+  return <button>button</button>;
 };
 
-const Button = ({ name }: ButtonProps) => {
-  return <div>Button {name}</div>;
+// named export
+export const Button2 = () => {
+  return (
+    <>
+      <button>button2</button>
+      <button>button2</button>
+    </>
+  );
 };
 
 export default Button;

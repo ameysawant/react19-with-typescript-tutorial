@@ -1,14 +1,15 @@
-import Button from "@/components/Button.tsx";
-import type ButtonProps from "./components/Button.tsx";
-import Counter from "./components/Counter.tsx";
+import Button, { Button2 } from "./components/Button";
 
-function App() {
-  console.log("app componenet rendered");
+const App = () => {
   return (
     <>
-      <Counter />
+      <Button />
+      <Button2 />
+      {2 + 2}
+      <img className="btn-primary" src="" alt="" />
+      <br />
     </>
   );
-}
+};
 
 export default App;
