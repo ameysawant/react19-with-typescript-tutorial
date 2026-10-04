@@ -1,7 +1,7 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Paragraph from "./components/Paragraph";
-import Sample from "./components/Sample";
+import TypesLevel2 from "./components/TypesLevel2";
 
 const App = () => {
   return (
@@ -9,7 +9,8 @@ const App = () => {
       {/* <Header />
       <h2>This is app component</h2>
       <Footer /> */}
-      <Sample />
+      {/* <TypesLevel1 /> */}
+      <TypesLevel2 />
     </>
   );
 };
