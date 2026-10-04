@@ -1,36 +1,54 @@
+// Level 1 - Basic Types:
+// string
+// number
+// boolean
+// null
+// undefined
+// any
+// unknown
+// void
+// never
+
 // Level 2 - Collections:
 // string[]
 // number[]
 // mixed[]
-// object[]
-// literal
 // union
 // tuple
 // object
+// object[]
 
-type MyName = string;
-type MyAge = number;
+type Cities = "mumbai" | "rajasthan" | "jaipur";
+const cities: Cities[] = ["mumbai", "rajasthan", "jaipur"];
+const city: Cities = "mumbai";
 
-const myName: MyName = "Kishori";
-const myAge: MyAge = 45;
-const isMarried: boolean = false;
-const value1: null = null;
-const value2: undefined = undefined;
-const value3: any = 456;
-const value4: unknown = "abc";
-const value5: () => void = () => {};
-const value6: () => never = () => {
-  throw new Error("error");
+type Countries = ["india", "australia", "china"];
+const countries: Countries = ["india", "australia", "china"];
+
+type Product = {
+  title: string;
+  price: number;
+  grams: string;
 };
+
+const product: Product = {
+  title: "Girnar tea",
+  price: 500,
+  grams: "250 grams",
+};
+
+const myarray: Product[] = [
+  {
+    title: "Girnar tea",
+    price: 500,
+    grams: "250 grams",
+  },
+];
 
 const TypesLevel2 = () => {
   return (
     <>
       <h2>Types Level2 -</h2>
-      {myName}
-      {myAge}
-      {isMarried ? "married" : "not marreid"}
-      {null === null ? "null" : "not null"}
     </>
   );
 };
