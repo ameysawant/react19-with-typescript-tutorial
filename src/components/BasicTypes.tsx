@@ -18,7 +18,12 @@
 // object
 // object[]
 
-// type and interface
+// Basic Types Level 3
+// type
+// &
+// interface
+// extends
+// optional
 
 type MyName = string;
 type MyAge = number;
@@ -48,17 +53,30 @@ const states: States[] = ["maharashtra", "jaipur", "bangalore"];
 type Countries = ["india", "usa", "china"];
 const countries: Countries = ["india", "usa", "china"];
 
-type Product = {
+type ProductCategory = {
+  category: string;
+};
+
+// type Product = ProductCategory & {
+//   title: string;
+//   price: number;
+//   grams: string;
+//   quantity: number;
+// };
+
+interface Product extends ProductCategory {
   title: string;
   price: number;
   grams: string;
-  quantity: number;
-};
+  quantity?: number;
+}
+
 const product: Product = {
   title: "girnar tea",
   price: 400,
   grams: "200gm",
-  quantity: 50,
+  // quantity: 50,
+  category: "drinks",
 };
 
 const productsArray: Product[] = [
@@ -66,13 +84,15 @@ const productsArray: Product[] = [
     title: "girnar tea",
     price: 400,
     grams: "200gm",
-    quantity: 50,
+    // quantity: 50,
+    category: "drinks",
   },
   {
     title: "tata tea",
     price: 200,
     grams: "200gm",
-    quantity: 20,
+    // quantity: 20,
+    category: "rice",
   },
 ];
 
