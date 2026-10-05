@@ -9,7 +9,7 @@ const App = () => {
       {/* <Header />
       <h2>This is app component</h2>
       <Footer /> */}
-      {/* <TypesLevel1 /> */}
+
       <BasicTypes />
     </>
   );
