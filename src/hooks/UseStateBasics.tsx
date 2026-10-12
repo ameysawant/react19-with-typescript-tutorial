@@ -1,59 +1,124 @@
-// 1. useState syntax
-// 2. useState rules
-// 3. useState 2 ways - direct & functional
-// 4. useState type
-// 5. useState examples
+// useState<number>(0);
+// useState<string>("Kishori");
+// useState<boolean>(false);
+// useState<string[]>(["apple", "banana"]);
+// useState<User>({ name: "Kishori", age: 45 });
 
 import { useState } from "react";
 
-type MyAge = number;
+type MyCount = number;
+type Product = string;
+type Product2 = {
+  id: number;
+  name: string;
+  price: number;
+};
+type User = {
+  name: string;
+  age: number;
+};
+
+const products: Product[] = ["apple", "banana"];
+const products2: Product2[] = [
+  {
+    id: 1,
+    name: "tea",
+    price: 500,
+  },
+  {
+    id: 2,
+    name: "coffee",
+    price: 300,
+  },
+];
 
 const UseStateBasics = () => {
-  const [age, setAge] = useState<MyAge>(0);
+  const [count, setCount] = useState<MyCount>(0);
+  const [myName, setMyName] = useState("kishori");
+  const [isVisible, setVisible] = useState(false);
+  const [fruits, setFruits] = useState<Product[]>(products);
+  const [user, setUser] = useState<User>({
+    name: "kishori",
+    age: 45,
+  });
+  const [allProducts, setAllProducts] = useState<Product2[]>(products2);
 
-  const increaseMyAge = () => {
-    setAge(age + 1);
-  };
-
-  const increaseMyAgeBy3 = () => {
-    console.log("first", age);
-    setAge(age + 1); // 0 + 1
-    console.log("second", age);
-    setAge(age + 1); // 1 + 1
-    console.log("third", age);
-    setAge(age + 1); // 2 + 1
-    console.log("fourth", age);
-  };
-
-  const increaseMyAgeBy3Functional = () => {
-    console.log("first", age);
-    setAge((prev) => {
-      console.log(prev);
+  const handleCount = () => {
+    setCount((prev) => {
       return prev + 1;
     });
-    console.log("second", age);
-    setAge((prev) => {
+  };
+
+  const handleReset = () => {
+    setCount(0);
+  };
+
+  const handleMyName = () => {
+    setMyName("tutorials");
+  };
+
+  const handleToggle = () => {
+    setVisible((prev) => !prev);
+  };
+
+  const addFruit = () => {
+    setFruits((prev) => {
       console.log(prev);
-      return prev + 1;
+      return [...prev, "orange"];
     });
-    console.log("third", age);
-    setAge((prev) => {
+  };
+
+  const addUserAge = () => {
+    setUser((prev) => {
       console.log(prev);
-      return prev + 1;
+      return { ...prev, age: prev.age + 1 };
+    });
+  };
+
+  const addPrice = () => {
+    setAllProducts((prev) => {
+      console.log(prev);
+      return prev.map((item) => ({
+        ...item,
+        price: item.price + 5,
+      }));
     });
   };
 
   console.log("component render");
-
   return (
     <>
       <h2>useState Basics</h2>
-      <h2>{age}</h2>
-      <button onClick={increaseMyAge}>increaseMyAge</button>
-      <button onClick={increaseMyAgeBy3}>increaseMyAgeBy3</button>
-      <button onClick={increaseMyAgeBy3Functional}>
-        increaseMyAgeBy3Functional
-      </button>
+      <h4>{count}</h4>
+      <h4>{myName}</h4>
+      <h4>{isVisible ? "is visible" : "is not visible"}</h4>
+      <h4>
+        {user.name} is {user.age} years old
+      </h4>
+      <button onClick={handleCount}>add count</button>
+      <button onClick={handleReset}>reset</button>
+      <button onClick={handleMyName}>handleMyName</button>
+      <button onClick={handleToggle}>handleToggle</button>
+      <button onClick={addFruit}>addFruit</button>
+      <button onClick={addUserAge}>addUserAge</button>
+      <button onClick={addPrice}>addPrice</button>
+
+      {fruits
+        ? fruits.map((item, index) => {
+            return <p key={index}>{item}</p>;
+          })
+        : "products not found"}
+
+      {allProducts
+        ? allProducts.map((item) => {
+            return (
+              <div key={item.id}>
+                <p>{item.name}</p>
+                <p>{item.price}</p>
+              </div>
+            );
+          })
+        : "products not found"}
     </>
   );
 };
