@@ -1,4 +1,5 @@
 import Events from "./components/Events";
+import CleanupFunction from "./hooks/CleanupFunction";
 import UseEffectBasics from "./hooks/UseEffectBasics";
 import UseStateBasics from "./hooks/UseStateBasics";
 import UseStateExamples from "./hooks/UseStateExamples";
@@ -9,7 +10,8 @@ const App = () => {
       {/* <Events /> */}
       {/* <UseStateBasics /> */}
       {/* <UseStateExamples /> */}
-      <UseEffectBasics />
+      {/* <UseEffectBasics /> */}
+      <CleanupFunction />
     </>
   );
 };
