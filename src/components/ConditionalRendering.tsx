@@ -59,6 +59,14 @@ const ConditionalRendering = () => {
     return <IsError isError={isError} />;
   }
 
+  /*
+|| 
+&&
+? :
+?.
+??
+*/
+
   return (
     <>
       <h2>Conditional rendering</h2>
@@ -67,12 +75,16 @@ const ConditionalRendering = () => {
           return (
             <div key={item.id}>
               <img src={item.image} alt="" width={50} />
-              <p>{item.title}</p>
+              <p>{item.title || "title not found"}</p>
               <p>{item.description}</p>
               <p>{item.category}</p>
-              <p>{item.price}</p>
-              <p>{item.rating.rate}</p>
-              <p>{item.rating.count}</p>
+              <p>
+                {item.price && item.price > 50
+                  ? `${item.price} high`
+                  : `${item.price} low`}
+              </p>
+              <p>{item?.rating?.rate ?? "N/A"}</p>
+              <p>{item?.rating?.count ?? 0}</p>
             </div>
           );
         })

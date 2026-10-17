@@ -67,6 +67,8 @@
 // && → Agar left side falsy hai toh left return karta hai, warna right return karta hai.
 // || → Agar left side truthy hai toh left return karta hai, warna right return karta hai.
 // ?? → Agar left side null ya undefined hai toh right return karta hai, warna left return karta hai.
+// ?. → Agar left side null ya undefined hai toh undefined return karta hai (error nahi deta), warna right side access karta hai.
+// ? : → Ternary operator: Agar condition true hai toh left (pehla) value return karta hai, warna right (dusra) value return karta hai.
 
 //  ========================================
 //  KAB KYA USE KAREIN
@@ -84,42 +86,12 @@
 import { useState } from "react";
 
 function ShortCircuit() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [name, setName] = useState("");
-  const [count, setCount] = useState<number | null>(null);
-
+  const [value, setValue] = useState("hi");
   return (
-    <div>
-      <h2>1. && (AND)</h2>
-
-      {isLoggedIn && <p>Welcome dikhega</p>}
-      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle Login</button>
-
-      <hr />
-
-      <h2>2. || (OR)</h2>
-      <p>Name: {name || "Guest"}</p>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Type name"
-      />
-
-      <hr />
-
-      <h2>3. ?? (NULLISH)</h2>
-      <p>Count: {count ?? 0}</p>
-
-      <button onClick={() => setCount(0)}>Set 0</button>
-      <button onClick={() => setCount(5)} style={{ marginLeft: "8px" }}>
-        Set 5
-      </button>
-      <button onClick={() => setCount(null)} style={{ marginLeft: "8px" }}>
-        Set Null
-      </button>
-
-      <hr />
-    </div>
+    <>
+      <h2>Short Circuit</h2>
+      <h2>{value || "Hello"}</h2>
+    </>
   );
 }
 
