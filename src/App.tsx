@@ -1,4 +1,6 @@
+import ConditionalRendering from "./components/ConditionalRendering";
 import Events from "./components/Events";
+import ShortCircuit from "./components/ShortCircuit";
 import CleanupFunction from "./hooks/CleanupFunction";
 import UseEffectBasics from "./hooks/UseEffectBasics";
 import UseStateBasics from "./hooks/UseStateBasics";
@@ -11,7 +13,9 @@ const App = () => {
       {/* <UseStateBasics /> */}
       {/* <UseStateExamples /> */}
       {/* <UseEffectBasics /> */}
-      <CleanupFunction />
+      {/* <CleanupFunction /> */}
+      <ConditionalRendering />
+      {/* <ShortCircuit /> */}
     </>
   );
 };
