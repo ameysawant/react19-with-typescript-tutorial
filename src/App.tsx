@@ -18,8 +18,8 @@ const App = () => {
       {/* <CleanupFunction /> */}
       {/* <ConditionalRendering /> */}
       {/* <ShortCircuit /> */}
-      <ControlledInputs />
-      {/* <UncontrolledForm /> */}
+      {/* <ControlledInputs /> */}
+      <UncontrolledForm />
     </>
   );
 };

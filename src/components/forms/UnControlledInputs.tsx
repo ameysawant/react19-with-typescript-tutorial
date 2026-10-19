@@ -35,16 +35,8 @@ function UncontrolledForm() {
       email: emailRef.current?.value ?? "",
       mobile: mobileRef.current?.value ?? "",
       country: countryRef.current?.value ?? "",
-      subscribe: subscribeYesRef.current?.checked
-        ? "yes"
-        : subscribeNoRef.current?.checked
-          ? "no"
-          : "not chosen",
-      gender: genderMaleRef.current?.checked
-        ? "male"
-        : genderFemaleRef.current?.checked
-          ? "female"
-          : "not chosen",
+      subscribe: subscribeYesRef.current?.checked ? "yes" : "no",
+      gender: genderMaleRef.current?.checked ? "male" : "female",
       file: file?.name ?? null,
       message: messageRef.current?.value ?? "",
     };
@@ -55,47 +47,50 @@ function UncontrolledForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
-      <input ref={firstNameRef} placeholder="First name" />
-      <input ref={lastNameRef} placeholder="Last name" />
-      <input ref={emailRef} type="email" placeholder="Email" />
-      <input ref={mobileRef} type="tel" placeholder="Mobile" />
+    <>
+      <h2>Uncontrolled Inputs</h2>
+      <form ref={formRef} onSubmit={handleSubmit}>
+        <input ref={firstNameRef} placeholder="First name" />
+        <input ref={lastNameRef} placeholder="Last name" />
+        <input ref={emailRef} type="email" placeholder="Email" />
+        <input ref={mobileRef} type="tel" placeholder="Mobile" />
 
-      <select ref={countryRef}>
-        <option value="">Select country</option>
-        <option value="in">India</option>
-        <option value="us">USA</option>
-        <option value="uk">UK</option>
-        <option value="au">Australia</option>
-      </select>
+        <select ref={countryRef}>
+          <option value="">Select country</option>
+          <option value="in">India</option>
+          <option value="us">USA</option>
+          <option value="uk">UK</option>
+          <option value="au">Australia</option>
+        </select>
 
-      <label>
-        <input ref={subscribeYesRef} type="checkbox" value="yes" /> Yes
-      </label>
-      <label>
-        <input ref={subscribeNoRef} type="checkbox" value="no" /> No
-      </label>
+        <label>
+          <input ref={subscribeYesRef} type="checkbox" value="yes" /> Yes
+        </label>
+        <label>
+          <input ref={subscribeNoRef} type="checkbox" value="no" /> No
+        </label>
 
-      <label>
-        <input ref={genderMaleRef} type="radio" name="gender" value="male" />{" "}
-        Male
-      </label>
-      <label>
-        <input
-          ref={genderFemaleRef}
-          type="radio"
-          name="gender"
-          value="female"
-        />{" "}
-        Female
-      </label>
+        <label>
+          <input ref={genderMaleRef} type="radio" name="gender" value="male" />{" "}
+          Male
+        </label>
+        <label>
+          <input
+            ref={genderFemaleRef}
+            type="radio"
+            name="gender"
+            value="female"
+          />{" "}
+          Female
+        </label>
 
-      <input type="file" ref={fileRef} />
+        <input type="file" ref={fileRef} />
 
-      <textarea ref={messageRef} placeholder="Message" rows={3} />
+        <textarea ref={messageRef} placeholder="Message" rows={3} />
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 }
 
