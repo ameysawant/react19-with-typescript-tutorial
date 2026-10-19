@@ -1,93 +1,105 @@
-// A controlled input is a form field whose value is stored and managed by React state. React is the single source of truth — the field displays whatever is in state, and the only way its value changes is when your code updates that state.
-
-// An uncontrolled input is a form field whose value is managed by the browser (the DOM). React does not track it as it changes — you only read the value when you need it, typically at submit time, using a ref or the form itself.
-
-// Controlled = React state owns the value.
 // Uncontrolled = the DOM owns the value.
+// Controlled = React state owns the value.
 
-import { useRef, useState } from "react";
+import { useState, useRef } from "react";
 import type { ChangeEvent, SubmitEvent } from "react";
 
-type FormElement = ChangeEvent<
-  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
->;
-type HandleChange = FormElement;
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  country: string;
+  gender: string;
+  terms: boolean;
+  file: string;
+  message: string;
+};
 
-type HandleMyForm = SubmitEvent<HTMLFormElement>;
+type FormElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+type HandleChange = ChangeEvent<FormElements>;
+type FormSubmitEvent = SubmitEvent<HTMLFormElement>;
 
-const intialValue = {
+const initialValue = {
   firstName: "",
   lastName: "",
   email: "",
   mobile: "",
   country: "",
   gender: "",
-  subscribe: "",
+  terms: false,
+  file: "",
   message: "",
-  // file: "",
 };
 
 const ControlledInputs = () => {
-  const [formData, setFormData] = useState(intialValue);
-  console.log("component rendered");
+  const inputRef = useRef<HTMLInputElement>(null);
+  console.log(inputRef);
 
-  // const inputFileRef = useRef<HTMLInputElement>(null);
+  console.log("component render");
+  const [formData, setFormData] = useState<FormData>(initialValue);
 
   const handleChange = (e: HandleChange) => {
-    const { value, name, type } = e.target;
+    const { name, value, type } = e.target;
+    const isChecked = (e.target as HTMLInputElement).checked;
+
     setFormData((prev) => {
-      return { ...prev, [name]: type === "number" ? Number(value) : value };
+      if (type === "checkbox") {
+        return { ...prev, [name]: isChecked };
+      }
+
+      // if (type === "number") {
+      //   return { ...prev, [name]: Number(value) };
+      // }
+
+      return { ...prev, [name]: value };
     });
   };
 
-  const handleMyForm = (e: HandleMyForm) => {
+  const handleMyForm = (e: FormSubmitEvent) => {
     e.preventDefault();
 
-    // const file = inputFileRef.current?.files?.[0] ?? null;
-    // console.log(file);
+    const file = inputRef.current?.files?.[0];
+    console.log(file);
 
     const finalData = {
       ...formData,
-      // file: file ? file.name : null,
-      //   mobile: Number(formData.mobile),
+      file: file ? file.name : null,
+      mobile: Number(formData.mobile),
     };
+
     console.log(finalData);
-    setFormData(intialValue);
-    // if (inputFileRef.current) {
-    //   inputFileRef.current.value = "";
-    // }
   };
 
   return (
     <>
       <h2>Controlled Inputs</h2>
-
       <form onSubmit={handleMyForm}>
         <input
           type="text"
           name="firstName"
-          placeholder="first name"
+          placeholder="First Name"
           value={formData.firstName}
           onChange={handleChange}
         />
         <input
           type="text"
           name="lastName"
-          placeholder="last name"
+          placeholder="Last Name"
           value={formData.lastName}
           onChange={handleChange}
         />
         <input
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="Email"
           value={formData.email}
           onChange={handleChange}
         />
         <input
           type="number"
           name="mobile"
-          placeholder="mobile"
+          placeholder="Mobile"
           value={formData.mobile}
           onChange={handleChange}
         />
@@ -95,7 +107,7 @@ const ControlledInputs = () => {
         <select name="country" value={formData.country} onChange={handleChange}>
           <option value="">Select Country</option>
           <option value="india">India</option>
-          <option value="usa">Usa</option>
+          <option value="usa">USA</option>
           <option value="china">China</option>
         </select>
 
@@ -106,8 +118,8 @@ const ControlledInputs = () => {
             value="male"
             checked={formData.gender === "male"}
             onChange={handleChange}
-          />
-          male
+          />{" "}
+          Male
         </label>
         <label>
           <input
@@ -116,41 +128,30 @@ const ControlledInputs = () => {
             value="female"
             checked={formData.gender === "female"}
             onChange={handleChange}
-          />
-          female
+          />{" "}
+          Female
         </label>
 
         <label>
           <input
             type="checkbox"
-            name="subscribe"
-            value="yes"
-            checked={formData.subscribe === "yes"}
+            name="terms"
+            checked={formData.terms}
             onChange={handleChange}
-          />
-          yes
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="subscribe"
-            value="no"
-            checked={formData.subscribe === "no"}
-            onChange={handleChange}
-          />
-          no
+          />{" "}
+          I accept Terms & Conditions
         </label>
 
-        {/* <input type="file" ref={inputFileRef} /> */}
+        <input ref={inputRef} type="file" name="file" />
 
         <textarea
           name="message"
-          placeholder="message"
+          placeholder="Message"
           value={formData.message}
           onChange={handleChange}
         />
 
-        <button type="submit">submit</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );

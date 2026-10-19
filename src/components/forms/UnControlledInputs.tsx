@@ -1,6 +1,8 @@
 // Uncontrolled (refs)
 // Input may Type karne pe re-render nahi hota. Submit dabane pe ref se value ek baar padhte hain.
 
+import { useRef } from "react";
+
 // Controlled (state)
 // Har letter type karne pe state update hoti hai aur page re-render hota hai.
 
@@ -9,10 +11,9 @@
 // Background mein value yaad rakhne ke liye like Timer ki ID or purana score or value
 // Value ko change karne par page refresh (re-render) na ho
 
-import { useRef } from "react";
+function UncontrolledInputs() {
+  console.log("component render");
 
-function UncontrolledForm() {
-  console.log("component rendered");
   const formRef = useRef<HTMLFormElement>(null);
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
@@ -26,34 +27,43 @@ function UncontrolledForm() {
   const fileRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
-  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  const handleMyForm = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const file = fileRef.current?.files?.[0] ?? null;
-    const data = {
+    // console.log(file);
+    const formData = {
       firstName: firstNameRef.current?.value ?? "",
       lastName: lastNameRef.current?.value ?? "",
       email: emailRef.current?.value ?? "",
       mobile: mobileRef.current?.value ?? "",
       country: countryRef.current?.value ?? "",
-      subscribe: subscribeYesRef.current?.checked ? "yes" : "no",
-      gender: genderMaleRef.current?.checked ? "male" : "female",
-      file: file?.name ?? null,
+      subscribe: subscribeYesRef.current?.checked
+        ? "yes"
+        : subscribeNoRef.current?.checked
+          ? "no"
+          : "not selected",
+      gender: genderMaleRef.current?.checked
+        ? "male"
+        : genderFemaleRef.current?.checked
+          ? "female"
+          : "not selected",
+      file: file ? file.name : null,
       message: messageRef.current?.value ?? "",
     };
 
     formRef.current?.reset();
 
-    console.log(data);
-  }
+    console.log(formData);
+  };
 
   return (
     <>
       <h2>Uncontrolled Inputs</h2>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        <input ref={firstNameRef} placeholder="First name" />
-        <input ref={lastNameRef} placeholder="Last name" />
+      <form ref={formRef} onSubmit={handleMyForm}>
+        <input ref={firstNameRef} type="text" placeholder="First name" />
+        <input ref={lastNameRef} type="text" placeholder="Last name" />
         <input ref={emailRef} type="email" placeholder="Email" />
-        <input ref={mobileRef} type="tel" placeholder="Mobile" />
+        <input ref={mobileRef} type="number" placeholder="Mobile" />
 
         <select ref={countryRef}>
           <option value="">Select country</option>
@@ -84,9 +94,9 @@ function UncontrolledForm() {
           Female
         </label>
 
-        <input type="file" ref={fileRef} />
+        <input ref={fileRef} type="file" />
 
-        <textarea ref={messageRef} placeholder="Message" rows={3} />
+        <textarea ref={messageRef} placeholder="Message" />
 
         <button type="submit">Submit</button>
       </form>
@@ -94,4 +104,4 @@ function UncontrolledForm() {
   );
 }
 
-export default UncontrolledForm;
+export default UncontrolledInputs;
