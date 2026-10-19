@@ -5,7 +5,7 @@
 // Controlled = React state owns the value.
 // Uncontrolled = the DOM owns the value.
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ChangeEvent, SubmitEvent } from "react";
 
 type FormElement = ChangeEvent<
@@ -24,10 +24,14 @@ const intialValue = {
   gender: "",
   subscribe: "",
   message: "",
+  file: "",
 };
 
 const ControlledInputs = () => {
   const [formData, setFormData] = useState(intialValue);
+  console.log("component rendered");
+
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: HandleChange) => {
     const { value, name, type } = e.target;
@@ -38,12 +42,20 @@ const ControlledInputs = () => {
 
   const handleMyForm = (e: HandleMyForm) => {
     e.preventDefault();
+
+    const file = inputFileRef.current?.files?.[0] ?? null;
+    console.log(file);
+
     const finalData = {
       ...formData,
+      file: file ? file.name : null,
       //   mobile: Number(formData.mobile),
     };
     console.log(finalData);
     setFormData(intialValue);
+    if (inputFileRef.current) {
+      inputFileRef.current.value = "";
+    }
   };
 
   return (
@@ -128,6 +140,8 @@ const ControlledInputs = () => {
           />
           no
         </label>
+
+        <input type="file" ref={inputFileRef} />
 
         <textarea
           name="message"

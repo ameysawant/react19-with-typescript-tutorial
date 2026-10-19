@@ -1,6 +1,7 @@
 import ConditionalRendering from "./components/ConditionalRendering";
 import Events from "./components/Events";
 import ControlledInputs from "./components/forms/ControlledInputs";
+import UncontrolledForm from "./components/forms/UnControlledInputs";
 import ShortCircuit from "./components/ShortCircuit";
 import CleanupFunction from "./hooks/CleanupFunction";
 import UseEffectBasics from "./hooks/UseEffectBasics";
@@ -17,7 +18,8 @@ const App = () => {
       {/* <CleanupFunction /> */}
       {/* <ConditionalRendering /> */}
       {/* <ShortCircuit /> */}
-      <ControlledInputs />
+      {/* <ControlledInputs /> */}
+      <UncontrolledForm />
     </>
   );
 };
