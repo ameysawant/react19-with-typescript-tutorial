@@ -68,6 +68,12 @@ const ControlledInputs = () => {
       mobile: Number(formData.mobile),
     };
 
+    setFormData(initialValue);
+
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+
     console.log(finalData);
   };
 
