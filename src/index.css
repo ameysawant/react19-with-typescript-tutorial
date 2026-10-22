@@ -14,3 +14,54 @@
   padding: 1rem;
   border: 1px solid #ddd;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  background-color: rgb(142, 198, 255);
+}
+
+.header {
+  background-color: #f5f5f5;
+  padding: 1rem;
+}
+.header .container {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
+.header ul li {
+  display: inline-block;
+}
+.header ul li a {
+  display: inline-block;
+  padding: 0 0.5rem;
+  text-decoration: none;
+  color: #232323;
+}
+
+.footer {
+  background-color: #f5f5f5;
+  padding: 1rem;
+}
+.footer .container {
+  margin: 0 auto;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.heroslider,
+.welcome,
+.newsletter {
+  padding: 5rem;
+  text-align: center;
+  font-size: 2rem;
+  background-color: rgba(62, 118, 186, 0.5);
+  color: white;
+  margin: 1rem 0;
+}
