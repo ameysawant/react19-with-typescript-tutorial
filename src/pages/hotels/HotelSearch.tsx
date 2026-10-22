@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router";
 
 const HotelSearch = () => {
   return (
     <>
       <div className="hotelsearch">
         <div>HotelSearch page</div>
-        <a href="/hotellist">hotel list</a>
+        <Link to="/hotellist">hotel list</Link>
       </div>
     </>
   );

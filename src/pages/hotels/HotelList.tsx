@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router";
 
 const HotelList = () => {
   return (
     <>
       <div className="hotellist">
         <div>HotelList page</div>
-        <a href="/hoteldetail">hotel detail</a>
+        <Link to="/hoteldetail">hotel detail</Link>
       </div>
     </>
   );
