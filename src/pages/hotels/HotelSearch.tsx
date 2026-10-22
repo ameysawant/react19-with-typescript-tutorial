@@ -3,8 +3,10 @@ import React from "react";
 const HotelSearch = () => {
   return (
     <>
-      <div>HotelSearch</div>
-      <a href="/hotellist">hotel list</a>
+      <div className="hotelsearch">
+        <div>HotelSearch page</div>
+        <a href="/hotellist">hotel list</a>
+      </div>
     </>
   );
 };

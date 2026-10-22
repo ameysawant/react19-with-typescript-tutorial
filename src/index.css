@@ -57,7 +57,14 @@ body {
 
 .heroslider,
 .welcome,
-.newsletter {
+.newsletter,
+.shoplist,
+.shopdetail,
+.hotelsearch,
+.hotellist,
+.hoteldetail,
+.login,
+.signup {
   padding: 5rem;
   text-align: center;
   font-size: 2rem;

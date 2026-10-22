@@ -2,8 +2,9 @@
 // import Events from "./components/Events";
 // import ControlledInputs from "./components/forms/ControlledInputs";
 // import UncontrolledForm from "./components/forms/UnControlledInputs";
-import { RouterProvider } from "react-router";
-import { router } from "./router/Router";
+
+import Home from "./pages/home/Index";
+
 // import ShortCircuit from "./components/ShortCircuit";
 // import CleanupFunction from "./hooks/CleanupFunction";
 // import UseEffectBasics from "./hooks/UseEffectBasics";
@@ -13,8 +14,7 @@ import { router } from "./router/Router";
 const App = () => {
   return (
     <>
-      <RouterProvider router={router} />
-
+      <Home />
       {/* <Events /> */}
       {/* <UseStateBasics /> */}
       {/* <UseStateExamples /> */}
