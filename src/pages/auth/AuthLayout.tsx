@@ -1,12 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router";
+import AuthHeader from "./AuthHeader";
+import AuthFooter from "./AuthFooter";
 
 const AuthLayout = () => {
   return (
     <>
-      <h2>auth header</h2>
+      <AuthHeader />
       <Outlet />
-      <h2>auth header</h2>
+      <AuthFooter />
     </>
   );
 };
