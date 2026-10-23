@@ -6,7 +6,7 @@ const HotelSearch = () => {
     <>
       <div className="hotelsearch">
         <div>HotelSearch page</div>
-        <Link to="/hotellist">hotel list</Link>
+        <Link to="/hotels/hotellist">hotel list</Link>
       </div>
     </>
   );
