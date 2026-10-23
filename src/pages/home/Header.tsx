@@ -1,7 +1,19 @@
-import React from "react";
-import { Link } from "react-router";
+// Link
+// Navlink
+// isActive
+// end
+import { Link, NavLink } from "react-router";
+
+type NavlinkProps = {
+  isActive: boolean;
+};
 
 const Header = () => {
+  const linkStyle = ({ isActive }: NavlinkProps) => {
+    // console.log(isActive);
+    return isActive ? "custom-active" : "";
+  };
+
   return (
     <>
       <div className="header">
@@ -10,15 +22,25 @@ const Header = () => {
 
           <ul>
             <li>
-              <Link to="/">Home</Link>
-              <Link to="/shoplist">Shop</Link>
-              <Link to="/hotels">Hotels</Link>
+              <NavLink to="/" end className={linkStyle}>
+                Home
+              </NavLink>
+              <NavLink to="/shoplist" className={linkStyle}>
+                Shop
+              </NavLink>
+              <NavLink to="/hotels" className={linkStyle}>
+                Hotels
+              </NavLink>
             </li>
           </ul>
           <ul>
             <li>
-              <Link to="/auth">Login</Link>
-              <Link to="/auth/signup">Signup</Link>
+              <NavLink to="/auth" end className={linkStyle}>
+                Login
+              </NavLink>
+              <NavLink to="/auth/signup" className={linkStyle}>
+                Signup
+              </NavLink>
             </li>
           </ul>
         </div>

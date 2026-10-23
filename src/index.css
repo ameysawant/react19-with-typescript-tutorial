@@ -72,3 +72,11 @@ body {
   color: white;
   margin: 1rem 0;
 }
+
+.active {
+  background-color: red;
+}
+
+.custom-active {
+  background-color: green;
+}

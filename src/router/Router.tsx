@@ -28,22 +28,23 @@ const router = createBrowserRouter([
         path: "shopdetail",
         Component: ShopDetail,
       },
+      {
+        path: "auth",
+        Component: AuthLayout,
+        children: [
+          {
+            index: true,
+            Component: Login,
+          },
+          {
+            path: "signup",
+            Component: Signup,
+          },
+        ],
+      },
     ],
   },
-  {
-    path: "/auth",
-    Component: AuthLayout,
-    children: [
-      {
-        index: true,
-        Component: Login,
-      },
-      {
-        path: "signup",
-        Component: Signup,
-      },
-    ],
-  },
+
   {
     path: "/hotels",
     Component: HotelLayout,
