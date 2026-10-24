@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         Component: ShopList,
       },
       {
-        path: "shopdetail",
+        path: "shopdetail/:id/:name",
         Component: ShopDetail,
       },
       {
