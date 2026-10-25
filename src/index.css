@@ -91,3 +91,13 @@ body {
 .shoplist img {
   width: 50%;
 }
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.buttons button {
+  padding: 1rem;
+}
