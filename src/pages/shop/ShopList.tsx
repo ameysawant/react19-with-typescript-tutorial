@@ -19,6 +19,7 @@ const ShopList = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category");
+  const selectedSortBy = searchParams.get("sortBy") || "default";
 
   const fetchAllProducts = async () => {
     try {
@@ -46,19 +47,59 @@ const ShopList = () => {
   }, []);
 
   const handleCategories = (categoryItem: string) => {
+    let newParams = new URLSearchParams(searchParams);
     if (categoryItem === "all") {
-      setSearchParams({});
+      // setSearchParams({});
+      newParams.delete("category");
     } else {
-      setSearchParams({ category: categoryItem });
+      // setSearchParams({ category: categoryItem });
+      newParams.set("category", categoryItem);
     }
+    setSearchParams(newParams);
   };
 
-  const filteredProducts = selectedCategory
-    ? products.filter((item) => item.category === selectedCategory)
-    : products;
+  const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    let newParams = new URLSearchParams(searchParams);
+    if (e.target.value === "default") {
+      // setSearchParams({});
+      newParams.delete("sortBy");
+    } else {
+      // setSearchParams({ sortBy: e.target.value });
+      newParams.set("sortBy", e.target.value);
+    }
+    setSearchParams(newParams);
+  };
+
+  const showFilteredProducts = () => {
+    let filteredProducts = selectedCategory
+      ? products.filter((item) => item.category === selectedCategory)
+      : products;
+
+    if (selectedSortBy === "low") {
+      filteredProducts = [...filteredProducts].sort(
+        (a, b) => a.price - b.price,
+      );
+    } else if (selectedSortBy === "high") {
+      filteredProducts = [...filteredProducts].sort(
+        (a, b) => b.price - a.price,
+      );
+    }
+
+    return filteredProducts;
+  };
+
+  const displayProducts = showFilteredProducts();
 
   return (
     <>
+      <div className="selectmenu">
+        <select value={selectedSortBy} onChange={handleSortBy}>
+          <option value="default">default</option>
+          <option value="low">low</option>
+          <option value="high">high</option>
+        </select>
+      </div>
+
       <div className="buttons">
         {categories.length > 0 &&
           categories.map((category, index) => {
@@ -70,8 +111,8 @@ const ShopList = () => {
           })}
       </div>
       <div className="shoplist">
-        {filteredProducts.length > 0 &&
-          filteredProducts.map((item) => {
+        {displayProducts.length > 0 &&
+          displayProducts.map((item) => {
             return (
               <div key={item.id} className="column">
                 <Link
