@@ -1,6 +1,7 @@
 import AuthLayout from "@/pages/auth/AuthLayout";
 import Login from "@/pages/auth/Login";
 import Signup from "@/pages/auth/Signup";
+import Cart from "@/pages/home/Cart";
 import HomeLayout from "@/pages/home/HomeLayout";
 import Home from "@/pages/home/Index";
 import HotelDetail from "@/pages/hotels/HotelDetail";
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "shopdetail/:id/:name",
         Component: ShopDetail,
+      },
+      {
+        path: "cart",
+        Component: Cart,
       },
       {
         path: "auth",

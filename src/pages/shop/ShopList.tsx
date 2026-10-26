@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 
 type Product = {
   id: number;
@@ -20,6 +20,9 @@ const ShopList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category");
   const selectedSortBy = searchParams.get("sortBy") || "default";
+
+  const location = useLocation();
+  console.log(location);
 
   const fetchAllProducts = async () => {
     try {
@@ -116,7 +119,7 @@ const ShopList = () => {
             return (
               <div key={item.id} className="column">
                 <Link
-                  to={`/shopdetail/${item.id}/${item.title.split(" ").join("-")}`}
+                  to={`/shopdetail/${item.id}/${item.title.split(" ").join("-")}${location.search}`}
                 >
                   <img src={item.image} alt="" />
                 </Link>
