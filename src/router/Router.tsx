@@ -10,8 +10,9 @@ import HotelList from "@/pages/hotels/HotelList";
 import HotelSearch from "@/pages/hotels/HotelSearch";
 import ShopDetail from "@/pages/shop/ShopDetail";
 import ShopList from "@/pages/shop/ShopList";
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
+import PageNotFound from "@/pages/PageNotFound";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "/hotels",
     Component: HotelLayout,
@@ -78,6 +78,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    Component: PageNotFound,
   },
 ]);
 

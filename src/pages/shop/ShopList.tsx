@@ -20,12 +20,14 @@ const ShopList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category");
   const selectedSortBy = searchParams.get("sortBy") || "default";
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
   console.log(location);
 
   const fetchAllProducts = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
 
@@ -42,6 +44,8 @@ const ShopList = () => {
       setProducts(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,6 +96,10 @@ const ShopList = () => {
   };
 
   const displayProducts = showFilteredProducts();
+
+  if (isLoading) {
+    return <h2>loading....</h2>;
+  }
 
   return (
     <>
