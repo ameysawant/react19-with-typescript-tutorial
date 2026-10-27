@@ -11,6 +11,7 @@ import HotelSearch from "@/pages/hotels/HotelSearch";
 import ShopDetail from "@/pages/shop/ShopDetail";
 import ShopList from "@/pages/shop/ShopList";
 import { createBrowserRouter } from "react-router";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,12 +27,17 @@ const router = createBrowserRouter([
         Component: ShopList,
       },
       {
-        path: "shopdetail/:id/:name",
-        Component: ShopDetail,
-      },
-      {
-        path: "cart",
-        Component: Cart,
+        Component: ProtectedRoute,
+        children: [
+          {
+            path: "shopdetail/:id/:name",
+            Component: ShopDetail,
+          },
+          {
+            path: "cart",
+            Component: Cart,
+          },
+        ],
       },
       {
         path: "auth",
@@ -59,12 +65,17 @@ const router = createBrowserRouter([
         Component: HotelSearch,
       },
       {
-        path: "hotellist",
-        Component: HotelList,
-      },
-      {
-        path: "hoteldetail",
-        Component: HotelDetail,
+        Component: ProtectedRoute,
+        children: [
+          {
+            path: "hotellist",
+            Component: HotelList,
+          },
+          {
+            path: "hoteldetail",
+            Component: HotelDetail,
+          },
+        ],
       },
     ],
   },
