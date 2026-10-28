@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router";
 
 const ProtectedRoute = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   if (!isAuthenticated) {
     return <Navigate to={"/auth"} replace={true} />;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router";
+import ProductGrid from "./ProductGrid";
 
 type Product = {
   id: number;
@@ -23,7 +24,7 @@ const ShopList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const fetchAllProducts = async () => {
     try {
@@ -95,6 +96,12 @@ const ShopList = () => {
     return filteredProducts;
   };
 
+  const handleRemoveItem = (id: number) => {
+    setProducts((prev) => {
+      return prev.filter((item) => item.id !== id);
+    });
+  };
+
   const displayProducts = showFilteredProducts();
 
   if (isLoading) {
@@ -122,7 +129,7 @@ const ShopList = () => {
           })}
       </div>
       <div className="shoplist">
-        {displayProducts.length > 0 &&
+        {/* {displayProducts.length > 0 &&
           displayProducts.map((item) => {
             return (
               <div key={item.id} className="column">
@@ -143,7 +150,11 @@ const ShopList = () => {
                 <p>{item.rating.count}</p>
               </div>
             );
-          })}
+          })} */}
+        <ProductGrid
+          displayProducts={displayProducts}
+          handleRemoveItem={handleRemoveItem}
+        />
       </div>
     </>
   );

@@ -4,8 +4,8 @@ import NewsLetter from "./NewsLetter";
 import Welcome from "./Welcome";
 
 const Index = () => {
-  const location = useLocation();
-  console.log(location);
+  // const location = useLocation();
+  // console.log(location);
   return (
     <>
       <HeroSlider />
