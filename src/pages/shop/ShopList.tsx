@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router";
 import ProductGrid from "./ProductGrid";
+import ProductContextProvider from "@/context/ProductContextProvider";
 
 type Product = {
   id: number;
@@ -151,10 +152,10 @@ const ShopList = () => {
               </div>
             );
           })} */}
-        <ProductGrid
-          displayProducts={displayProducts}
-          handleRemoveItem={handleRemoveItem}
-        />
+
+        <ProductContextProvider handleRemoveItem={handleRemoveItem}>
+          <ProductGrid displayProducts={displayProducts} />
+        </ProductContextProvider>
       </div>
     </>
   );

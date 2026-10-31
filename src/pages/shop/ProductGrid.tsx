@@ -16,18 +16,14 @@ type Product = {
 
 type ProductGridProps = {
   displayProducts: Product[];
-  handleRemoveItem: (id: number) => void;
 };
 
-const ProductGrid = ({
-  displayProducts,
-  handleRemoveItem,
-}: ProductGridProps) => {
+const ProductGrid = ({ displayProducts }: ProductGridProps) => {
   return (
     <>
       {displayProducts.length > 0 &&
         displayProducts.map((item) => {
-          return <ProductCard {...item} handleRemoveItem={handleRemoveItem} />;
+          return <ProductCard key={item.id} {...item} />;
         })}
     </>
   );

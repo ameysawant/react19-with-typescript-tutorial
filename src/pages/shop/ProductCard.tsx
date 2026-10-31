@@ -1,5 +1,9 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router";
+import {
+  ProductContext,
+  useProductContext,
+} from "@/context/ProductContextProvider";
 
 type Product = {
   id: number;
@@ -14,9 +18,7 @@ type Product = {
   };
 };
 
-type ProductCardProps = Product & {
-  handleRemoveItem: (id: number) => void;
-};
+type ProductCardProps = Product & {};
 
 const ProductCard = ({
   id,
@@ -26,11 +28,13 @@ const ProductCard = ({
   price,
   image,
   rating: { rate, count },
-  handleRemoveItem,
 }: ProductCardProps) => {
+  const location = useLocation();
+  const { handleRemoveItem } = useProductContext();
+
   return (
     <>
-      <div key={id} className="column">
+      <div className="column">
         <Link
           to={`/shopdetail/${id}/${title.split(" ").join("-")}${location.search}`}
         >
