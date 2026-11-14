@@ -5,22 +5,37 @@ type Obj = {
 };
 
 type ChildProps = {
-  // props: number | string | boolean | string[];
-  props: Obj;
-  onClick: () => void;
-  child: number;
+  number: number;
+  name: string;
+  array: string[];
+  obj: Obj;
 };
 
-const Child = ({ props, onClick, child }: ChildProps) => {
+const Child = ({ number, name, array, obj }: ChildProps) => {
   console.log("child rendered");
   return (
     <>
-      {/* <h2>child {props}</h2> */}
-      <h2>child {props.name}</h2>
-      <h2>child count inside child{child}</h2>
-      <button onClick={onClick}>child click</button>
+      <h2>child number - {number}</h2>
+      <h2>child name - {name}</h2>
+      <h2>child array - {array}</h2>
+      <h2>child obj - {obj.name}</h2>
     </>
   );
 };
 
-export default memo(Child);
+const checkProps = (prevProps: ChildProps, nextProps: ChildProps) => {
+  const isNumberSame = prevProps.number === nextProps.number;
+  const isNameSame = prevProps.name === nextProps.name;
+  const isArraySame = prevProps.array === nextProps.array;
+  const isObjSame = prevProps.obj === nextProps.obj;
+  console.log("prevProps= ", prevProps);
+  console.log("nextProps= ", nextProps);
+  console.log("number= ", isNumberSame ? "SAME" : "DIFFERENCE");
+  console.log("name= ", isNameSame ? "SAME" : "DIFFERENCE");
+  console.log("array= ", isArraySame ? "SAME" : "DIFFERENCE");
+  console.log("obj= ", isObjSame ? "SAME" : "DIFFERENCE");
+
+  return isNumberSame && isNameSame && isArraySame && isObjSame;
+};
+
+export default memo(Child, checkProps);
