@@ -5,11 +5,13 @@ import { Outlet } from "react-router";
 const HomeLayout = () => {
   return (
     <>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
+      <div style={{ display: "none" }}>
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 };

@@ -9,10 +9,12 @@
 // import UseStateExamples from "./hooks/UseStateExamples";
 import { RouterProvider } from "react-router";
 import router from "./router/Router";
+import Parent from "./performance/Parent";
 
 const App = () => {
   return (
     <>
+      <Parent />
       <RouterProvider router={router} />
       {/* <Events /> */}
       {/* <UseStateBasics /> */}
