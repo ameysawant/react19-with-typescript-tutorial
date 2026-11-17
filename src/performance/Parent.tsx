@@ -61,11 +61,11 @@ const Parent = () => {
 
   const myArrayData = myArray.map((item) => item);
 
-  const modifiedName = `${myName} - tutorials`;
-
   const myObjData = {
     ...myObj,
   };
+
+  const myModifiedName = `${myName}-tutorials`;
 
   console.log("parent rendered");
   return (
@@ -74,16 +74,22 @@ const Parent = () => {
 
       <Child
         myNumber={myNumber}
-        myName={modifiedName}
+        myName={myModifiedName}
         myArray={myArrayData}
         myObj={myObjData}
       />
 
       <button onClick={() => setParent((prev) => prev + 1)}>add parent</button>
       <button onClick={() => setMyNumber((prev) => prev + 1)}>
-        change myNumber
+        change MyNO
       </button>
-      <button onClick={() => setMyName("tutorials")}>change myName</button>
+      <button onClick={() => setMyName("tutorials")}>change MyName</button>
+      <button onClick={() => setMyArray(["apple", "banana"])}>
+        change myArray
+      </button>
+      <button onClick={() => setMyObj({ name: "tutorials" })}>
+        change myObj
+      </button>
     </>
   );
 };
