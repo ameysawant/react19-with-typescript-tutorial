@@ -9,6 +9,9 @@ symbol
 bigint
 */
 
+import { useState } from "react";
+import Child from "./Child";
+
 // reference types - mutable
 /*
 array
@@ -17,45 +20,70 @@ function
 */
 
 /*
-  const [parent, setParent] = useState(0);
-  const [number, setNumber] = useState(0);
-  const [name, setName] = useState("kishori");
-  const [array, setArray] = useState(["mango", "orange"]);
-  const [obj, setObj] = useState({ name: "kishori" });
+REACT MEMO -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+React.memo ek Higher-Order Component (HOC) hai jo ek component ko wrap karta hai. Agar component ke props change nahi hue hain, toh woh component ko dobara render hone se rokta hai aur pichla (cached) output hi use karta hai.
 
-  React.memo ek Higher-Order Component (HOC) hai jo component ko wrap karta hai. Agar component ke props same hain (shallow compare), to woh component re-render nahi hota — purana rendered output hi use hota hai. Aur agar same nahi hai to re-render hota hai.
+const checkProps = (prevProps, nextProps) => {
+  prevProps.props === nextProps.props
+};
 
-  useMemo ek React hook hai jo expensive calculation ka result cache karta hai. Jab tak dependency array ke values na badlein, woh purana result (same reference) return karta hai — calculation dobara nahi karta.
+IMPORTANT -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+React.memo reference types (array, object, function) ke saath reference check karta hai, aur primitive types (number, string, boolean) ke saath value check karta hai. 
 
-  useCallback ek React hook hai jo function ko cache karta hai. Jab tak dependency array ke values na badlein, woh same function reference return karta hai — naya function nahi banata.
+Kyunki React.memo har prop pe prevProps.prop === nextProps.prop chalata hai, isliye woh primitives ki value dekhta hai aur references ka address dekhta hai.
+
+
+Primitives ke saath ===: Value compare karta hai
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+5 === 5 true
+"hello" === "hello" true
+true === true true
+
+References ke saath ===: Memory address (reference) compare karta hai.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+[1,2] === [1,2] false (dono ke address alag hain)
+{a:1} === {a:1} false (dono ke address alag hain)
+function(){} === function(){} false
 */
 
-import { useMemo, useState } from "react";
-import Child from "./Child";
+type Obj = {
+  name: string;
+};
 
 const Parent = () => {
-  const [parent, setParent] = useState(0);
-  const [number, setNumber] = useState(0);
-  const [name, setName] = useState("kishori");
-  const [array, setArray] = useState(["mango", "orange"]);
-  const [obj, setObj] = useState({ name: "kishori" });
+  const [parent, setParent] = useState<number>(0);
+  const [myNumber, setMyNumber] = useState<number>(0);
+  const [myName, setMyName] = useState<string>("kishori");
+  const [myArray, setMyArray] = useState<string[]>(["mango", "orange"]);
+  const [myObj, setMyObj] = useState<Obj>({ name: "kishori" });
 
-  const arrData = useMemo(() => array.map((item) => item), [array]);
+  const myArrayData = myArray.map((item) => item);
 
-  const objData = useMemo(() => {
-    return { ...obj };
-  }, [obj]);
+  const modifiedName = `${myName} - tutorials`;
+
+  const myObjData = {
+    ...myObj,
+  };
 
   console.log("parent rendered");
-
   return (
     <>
-      <h2>Parent {parent}</h2>
-      <Child number={number} name={name} array={arrData} obj={objData} />
-      <button onClick={() => setParent((prev) => prev + 1)}>parent</button>
-      <button onClick={() => setArray(["apple", "banana"])}>
-        array change
+      <h2>parent {parent}</h2>
+
+      <Child
+        myNumber={myNumber}
+        myName={modifiedName}
+        myArray={myArrayData}
+        myObj={myObjData}
+      />
+
+      <button onClick={() => setParent((prev) => prev + 1)}>add parent</button>
+      <button onClick={() => setMyNumber((prev) => prev + 1)}>
+        change myNumber
       </button>
+      <button onClick={() => setMyName("tutorials")}>change myName</button>
     </>
   );
 };

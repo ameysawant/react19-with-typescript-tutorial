@@ -5,37 +5,36 @@ type Obj = {
 };
 
 type ChildProps = {
-  number: number;
-  name: string;
-  array: string[];
-  obj: Obj;
+  myNumber: number;
+  myName: string;
+  myArray: string[];
+  myObj: Obj;
 };
 
-const Child = ({ number, name, array, obj }: ChildProps) => {
+const Child = ({ myNumber, myName, myArray, myObj }: ChildProps) => {
   console.log("child rendered");
   return (
     <>
-      <h2>child number - {number}</h2>
-      <h2>child name - {name}</h2>
-      <h2>child array - {array}</h2>
-      <h2>child obj - {obj.name}</h2>
+      <h2>child myNumber = {myNumber}</h2>
+      <h2>child myName = {myName}</h2>
+      <h2>child myArray = {myArray}</h2>
+      <h2>child myObject = {myObj.name}</h2>
     </>
   );
 };
 
 const checkProps = (prevProps: ChildProps, nextProps: ChildProps) => {
-  const isNumberSame = prevProps.number === nextProps.number;
-  const isNameSame = prevProps.name === nextProps.name;
-  const isArraySame = prevProps.array === nextProps.array;
-  const isObjSame = prevProps.obj === nextProps.obj;
-  console.log("prevProps= ", prevProps);
-  console.log("nextProps= ", nextProps);
-  console.log("number= ", isNumberSame ? "SAME" : "DIFFERENCE");
-  console.log("name= ", isNameSame ? "SAME" : "DIFFERENCE");
-  console.log("array= ", isArraySame ? "SAME" : "DIFFERENCE");
-  console.log("obj= ", isObjSame ? "SAME" : "DIFFERENCE");
-
-  return isNumberSame && isNameSame && isArraySame && isObjSame;
+  const isMyArraySame = prevProps.myArray === nextProps.myArray;
+  const isMyNameSame = prevProps.myName === nextProps.myName;
+  const isMyNumberSame = prevProps.myNumber === nextProps.myNumber;
+  const isMyObjSame = prevProps.myObj === nextProps.myObj;
+  console.log("prevProps = ", prevProps);
+  console.log("nextProps = ", nextProps);
+  console.log("myArray = ", isMyArraySame ? "SAME" : "DIFFERENCE");
+  console.log("myName = ", isMyNameSame ? "SAME" : "DIFFERENCE");
+  console.log("myNumber = ", isMyNumberSame ? "SAME" : "DIFFERENCE");
+  console.log("myObj = ", isMyObjSame ? "SAME" : "DIFFERENCE");
+  return isMyArraySame && isMyNameSame && isMyNumberSame && isMyObjSame;
 };
 
 export default memo(Child, checkProps);
