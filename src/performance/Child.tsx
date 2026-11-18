@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 type Obj = {
   name: string;
@@ -12,6 +12,17 @@ type ChildProps = {
 };
 
 const Child = ({ myNumber, myName, myArray, myObj }: ChildProps) => {
+  // useMemo(()=>{},[])
+
+  const calculatedValue = useMemo(() => {
+    console.log("heavy calculation function ran");
+    let sum = 0;
+    for (let i = 0; i < 300000000; i++) {
+      sum += myNumber * 10;
+    }
+    return sum;
+  }, [myNumber]);
+
   console.log("child rendered");
   return (
     <>
@@ -19,6 +30,7 @@ const Child = ({ myNumber, myName, myArray, myObj }: ChildProps) => {
       <h2>child myName = {myName}</h2>
       <h2>child myArray = {myArray}</h2>
       <h2>child myObj = {myObj.name}</h2>
+      <h2>child total = {calculatedValue}</h2>
     </>
   );
 };
@@ -38,3 +50,4 @@ const checkProps = (prevProps: ChildProps, nextProps: ChildProps) => {
 };
 
 export default memo(Child, checkProps);
+// export default Child;

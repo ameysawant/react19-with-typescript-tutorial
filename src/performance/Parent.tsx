@@ -9,7 +9,7 @@ symbol
 bigint
 */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Child from "./Child";
 
 // reference types - mutable
@@ -59,11 +59,17 @@ const Parent = () => {
   const [myArray, setMyArray] = useState<string[]>(["mango", "orange"]);
   const [myObj, setMyObj] = useState<Obj>({ name: "kishori" });
 
-  const myArrayData = myArray.map((item) => item);
+  // const myArrayData = myArray.map((item) => item);
+  const myArrayData = useMemo(() => {
+    return myArray.map((item) => item);
+  }, [myArray]);
 
-  const myObjData = {
-    ...myObj,
-  };
+  // const myObjData = {
+  //   ...myObj,
+  // };
+  const myObjData = useMemo(() => {
+    return { ...myObj };
+  }, [myObj]);
 
   const myModifiedName = `${myName}-tutorials`;
 
