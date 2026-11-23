@@ -9,9 +9,16 @@ type ChildProps = {
   myName: string;
   myArray: string[];
   myObj: Obj;
+  handleClick: () => void;
 };
 
-const Child = ({ myNumber, myName, myArray, myObj }: ChildProps) => {
+const Child = ({
+  myNumber,
+  myName,
+  myArray,
+  myObj,
+  handleClick,
+}: ChildProps) => {
   // useMemo(()=>{},[])
 
   const calculatedValue = useMemo(() => {
@@ -31,6 +38,7 @@ const Child = ({ myNumber, myName, myArray, myObj }: ChildProps) => {
       <h2>child myArray = {myArray}</h2>
       <h2>child myObj = {myObj.name}</h2>
       <h2>child total = {calculatedValue}</h2>
+      <button onClick={handleClick}>change My Count</button>
     </>
   );
 };
@@ -40,13 +48,21 @@ const checkProps = (prevProps: ChildProps, nextProps: ChildProps) => {
   const isMyNumberSame = prevProps.myNumber === nextProps.myNumber;
   const isMyNameSame = prevProps.myName === nextProps.myName;
   const isMyObjSame = prevProps.myObj === nextProps.myObj;
+  const isMyFunction = prevProps.handleClick === nextProps.handleClick;
   console.log("prevProps = ", prevProps);
   console.log("nextProps = ", nextProps);
   console.log("myArray = ", isMyArraySame ? "SAME" : "DIFFERENCE");
   console.log("myNumber = ", isMyNumberSame ? "SAME" : "DIFFERENCE");
   console.log("myName = ", isMyNameSame ? "SAME" : "DIFFERENCE");
   console.log("myObj = ", isMyObjSame ? "SAME" : "DIFFERENCE");
-  return isMyArraySame && isMyNameSame && isMyNumberSame && isMyObjSame;
+  console.log("myFunc = ", isMyFunction ? "SAME" : "DIFFERENCE");
+  return (
+    isMyArraySame &&
+    isMyNameSame &&
+    isMyNumberSame &&
+    isMyObjSame &&
+    isMyFunction
+  );
 };
 
 export default memo(Child, checkProps);

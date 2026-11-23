@@ -9,7 +9,7 @@ symbol
 bigint
 */
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Child from "./Child";
 
 // reference types - mutable
@@ -46,6 +46,8 @@ References ke saath ===: Memory address (reference) compare karta hai.
 [1,2] === [1,2] false (dono ke address alag hain)
 {a:1} === {a:1} false (dono ke address alag hain)
 function(){} === function(){} false
+
+useCallback ek React Hook hai jo ek function ka reference (address) cache (yaad) rakhta hai. Jab tak uski dependency array ki values change nahi hoti, React naya function nahi banata — purana wala hi return karta hai.
 */
 
 type Obj = {
@@ -55,6 +57,7 @@ type Obj = {
 const Parent = () => {
   const [parent, setParent] = useState<number>(0);
   const [myNumber, setMyNumber] = useState<number>(0);
+  const [myCount, setMyCount] = useState<number>(0);
   const [myName, setMyName] = useState<string>("kishori");
   const [myArray, setMyArray] = useState<string[]>(["mango", "orange"]);
   const [myObj, setMyObj] = useState<Obj>({ name: "kishori" });
@@ -73,16 +76,22 @@ const Parent = () => {
 
   const myModifiedName = `${myName}-tutorials`;
 
+  const handleClick = useCallback(() => {
+    setMyCount((prev) => prev + 1);
+  }, [myCount]);
+
   console.log("parent rendered");
   return (
     <>
       <h2>parent {parent}</h2>
+      <h2>parent mycount = {myCount}</h2>
 
       <Child
         myNumber={myNumber}
         myName={myModifiedName}
         myArray={myArrayData}
         myObj={myObjData}
+        handleClick={handleClick}
       />
 
       <button onClick={() => setParent((prev) => prev + 1)}>add parent</button>
